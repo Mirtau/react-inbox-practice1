@@ -26,7 +26,7 @@ const starred = message.starred ? '' : '-o'
 {message.labels.map((label, index)=> (<Label key = {index} label = {label}/>))}
   <a href ='#' onClick={()=>(toggleClass(message, 'read'))}>
   {message.subject}
-  </a>
+</a> //change a tag to link
 </div>
 </div>
 

@@ -3,35 +3,34 @@ import React from 'react'
 
 
 
-const Toolbar = ({selectAll, allRead, allUnread, messages}) => {
+const Toolbar = ({selectAll, allRead, allUnread, messages, handleChange, handleRemoveChange, message, deleteMessage, countSelected}) => {
  var numSelected = 0
- var boxChock = 0;
+ var boxCheck = 0;
 for (var i = 0; i < messages.length; i++) {
   if(messages[i].selected === true){
   numSelected ++
 }
 }
-console.log(numSelected);
 if (numSelected === 0){
-  boxChock = 'square'
+  boxCheck = 'square'
 }
 else if( numSelected < messages.length){
-  boxChock = 'minus-square'}
+  boxCheck = 'minus-square'}
 else if(numSelected === messages.length){
-boxChock = 'check-square'}
-console.log(boxChock);
+boxCheck = 'check-square'}
 
+let num = countSelected(messages)
   return (<div className="row toolbar">
     <div className="col-md-12">
       <p className="pull-right">
-        <span className="badge badge">2</span>
+        <span className="badge badge">{num}</span>
         unread messages
       </p>
 
-      <button className="btn btn-default">
-        <i className={`fa fa-${boxChock}-o`} onClick={() => {
-            selectAll()
-          }}></i>
+      <button className="btn btn-default" onClick={() => {
+          selectAll()
+        }}>
+        <i className={`fa fa-${boxCheck}-o`} ></i>
       </button>
 
       <button className="btn btn-default" onClick={() => {
@@ -46,21 +45,24 @@ console.log(boxChock);
         Mark As Unread
       </button>
 
-      <select className="form-control label-select">
-        <option>Apply label</option>
-        <option value="dev">dev</option>
+      <select className="form-control label-select" onChange={(e)=>{handleChange(e, message)}}>
+
+        <option value="">Apply label</option>
+        <option value="dev" >dev</option>
         <option value="personal">personal</option>
         <option value="gschool">gschool</option>
       </select>
 
-      <select className="form-control label-select">
+      <select className="form-control label-select" onChange={(e)=>{handleRemoveChange(e, message)}}>
         <option>Remove label</option>
         <option value="dev">dev</option>
         <option value="personal">personal</option>
         <option value="gschool">gschool</option>
       </select>
 
-      <button className="btn btn-default">
+      <button className="btn btn-default"onClick={() => {
+          deleteMessage()
+        }}>
         <i className="fa fa-trash"></i>
       </button>
     </div>
