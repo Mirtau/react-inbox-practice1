@@ -46,7 +46,6 @@ let num = countSelected(messages)
       </button>
 
       <select className="form-control label-select" onChange={(e)=>{handleChange(e, message)}}>
-
         <option value="">Apply label</option>
         <option value="dev" >dev</option>
         <option value="personal">personal</option>
